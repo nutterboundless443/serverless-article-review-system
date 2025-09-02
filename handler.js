@@ -9,7 +9,7 @@ module.exports.submitArticle = async (event) => {
   } catch (error) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Invalid JSON' }),
+      body: JSON.stringify({ message: 'Invalid JSON', error: error.message }),
     };  
   }
   if (!body.id || !body.title || !body.content) {
