@@ -1,0 +1,14 @@
+{
+  "name": "serverless-article-review-system",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "serverless deploy"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1047.0"
+  },
+  "devDependencies": {
+    "serverless": "^2.72.0"
+  }
+}
