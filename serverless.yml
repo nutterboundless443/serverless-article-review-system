@@ -11,6 +11,7 @@ provider:
         - dynamodb:GetItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:Scan
       Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-${self:provider.stage}-articles'
 
 functions:
