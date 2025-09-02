@@ -1,0 +1,45 @@
+service: serverless-article-review-system
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-west-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}-${self:provider.stage}-articles'
+
+functions:
+  submitArticle:
+    handler: handler.submitArticle
+    events:
+      - http:
+          path: articles
+          method: post
+
+  getArticle:
+    handler: handler.getArticle
+    events:
+      - http:
+          path: articles/{id}
+          method: get
+
+resources:
+  Resources:
+    ArticlesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${self:provider.stage}-articles
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
