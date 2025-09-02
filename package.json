@@ -6,7 +6,7 @@
     "deploy": "serverless deploy"
   },
   "dependencies": {
-    "aws-sdk": "^3.0.5"
+    "aws-sdk": "^3.14.0"
   },
   "devDependencies": {
     "serverless": "^2.72.0"
