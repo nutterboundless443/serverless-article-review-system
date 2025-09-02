@@ -3,7 +3,15 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = process.env.ARTICLES_TABLE;
 
 module.exports.submitArticle = async (event) => {
-  const body = JSON.parse(event.body);
+  let body;
+  try {
+    body = JSON.parse(event.body);
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Invalid JSON' }),
+    };  
+  }
   const article = {
     id: body.id,
     title: body.title,
