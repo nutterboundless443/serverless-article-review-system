@@ -5,7 +5,7 @@ const tableName = process.env.ARTICLES_TABLE;
 module.exports.submitArticle = async (event) => {
   let body;
   try {
-    body = JSON.parse(event.body);
+    body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
   } catch (error) {
     return {
       statusCode: 400,
