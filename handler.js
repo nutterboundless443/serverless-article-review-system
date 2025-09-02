@@ -12,10 +12,14 @@ module.exports.submitArticle = async (event) => {
       body: JSON.stringify({ message: 'Invalid JSON', error: error.message }),
     };  
   }
-  if (!body.id || !body.title || !body.content) {
+  const missingFields = [];
+  if (!body.id) missingFields.push('id');
+  if (!body.title) missingFields.push('title');
+  if (!body.content) missingFields.push('content');
+  if (missingFields.length) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Missing required fields: id, title, and content are required.' }),
+      body: JSON.stringify({ message: `Missing required fields: ${missingFields.join(', ')}` }),
     };
   }
   const article = {
