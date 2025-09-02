@@ -12,6 +12,12 @@ module.exports.submitArticle = async (event) => {
       body: JSON.stringify({ message: 'Invalid JSON' }),
     };  
   }
+  if (!body.id || !body.title || !body.content) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Missing required fields' }),
+    };
+  }
   const article = {
     id: body.id,
     title: body.title,
