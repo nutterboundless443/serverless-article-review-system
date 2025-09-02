@@ -15,7 +15,7 @@ module.exports.submitArticle = async (event) => {
   if (!body.id || !body.title || !body.content) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: 'Missing required fields' }),
+      body: JSON.stringify({ message: 'Missing required fields: id, title, and content are required.' }),
     };
   }
   const article = {
